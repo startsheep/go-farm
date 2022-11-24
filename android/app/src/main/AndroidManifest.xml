@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.getx_pattern_starter">
    <application
-        android:label="getx_pattern_starter"
+        android:label="Go Farm"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

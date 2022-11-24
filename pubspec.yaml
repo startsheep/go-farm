@@ -7,7 +7,11 @@ environment:
 
 dependencies: 
   cupertino_icons: ^1.0.2
-  get: 4.6.5
+  get: 4.6.4
+  sp_util: 2.0.3
+  imageview360: 1.3.0
+  google_fonts: 3.0.1
+  carousel_slider: 4.1.1
   flutter: 
     sdk: flutter
 
@@ -17,5 +21,9 @@ dev_dependencies:
     sdk: flutter
 
 flutter: 
+  assets:
+  - assets
   uses-material-design: true
+
+
 
