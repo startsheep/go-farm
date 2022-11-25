@@ -1,68 +1,62 @@
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:getx_pattern_starter/app/theme/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class FarmContent extends StatelessWidget {
-  final dynamic content;
-  const FarmContent({
+class FarmCard extends StatelessWidget {
+  const FarmCard({
     Key? key,
-    this.content,
+    required this.farm,
   }) : super(key: key);
+
+  final Map<String, dynamic> farm;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onLongPress: () {
-        print('');
-      },
       onTap: () {
-        print('');
-        // show dialog
+        print('farm');
       },
-      focusColor: Colors.red,
+      onLongPress: () {
+        // show only description
+        showDescription();
+      },
       child: Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 216, 216, 216).withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 3,
-              offset: const Offset(2, 2),
-            ),
-          ],
+          boxShadow: [AppTheme.dShadow],
         ),
-        child: Column(
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-                child: Image.asset(
-                  content['image'],
-                  semanticLabel: content['title'],
-                  excludeFromSemantics: true,
-                  fit: BoxFit.cover,
-                  width: Get.width,
-                  colorBlendMode: BlendMode.darken,
+              flex: 2,
+              child: Container(
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    image: AssetImage(farm['image']),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(5),
-              child: SizedBox(
-                width: Get.width,
+            Expanded(
+              flex: 4,
+              child: Container(
+                // padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.only(left: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      content['title'],
+                      farm['title'],
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -74,14 +68,14 @@ class FarmContent extends StatelessWidget {
                     //   height: 5,
                     // ),
                     Text(
-                      content['slug'],
+                      farm['slug'],
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
                       ),
                     ),
                     // ExpandableText(
-                    //   content['description'] ?? 'description',
+                    //   farm['description'] ?? 'description',
                     //   expandText: "Selengkapnya",
                     //   collapseText: "Sembunyikan",
                     //   animation: true,
@@ -89,7 +83,9 @@ class FarmContent extends StatelessWidget {
                     //     fontSize: 12,
                     //   ),
                     // ),
-
+                    const SizedBox(
+                      height: 5,
+                    ),
                     Text.rich(
                       TextSpan(
                         children: [
@@ -101,9 +97,9 @@ class FarmContent extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: content['address']['street'] +
+                            text: farm['address']['street'] +
                                 ', ' +
-                                content['address']['city'],
+                                farm['address']['city'],
                             style: const TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
@@ -116,13 +112,13 @@ class FarmContent extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      content['distance'].toString() + ' km dari lokasi anda',
+                      farm['distance'].toString() + ' km dari lokasi anda',
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
                       ),
                     ),
-                    // make rating from count rating of content
+                    // make rating from count rating of farm
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -135,7 +131,7 @@ class FarmContent extends StatelessWidget {
                                   color: AppTheme.warning,
                                 );
                               },
-                              rating: content['rating'].toDouble(),
+                              rating: farm['rating'].toDouble(),
                               itemCount: 5,
                               itemSize: 15.0,
                             ),
@@ -143,7 +139,7 @@ class FarmContent extends StatelessWidget {
                               width: 5,
                             ),
                             Text(
-                              content['rating'].toString(),
+                              farm['rating'].toString(),
                               style: const TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey,
@@ -177,6 +173,74 @@ class FarmContent extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void showDescription() {
+    Get.bottomSheet(
+      Container(
+        // height: Get.height * 0.5,
+        color: Colors.white,
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              farm['title'],
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Text(
+              'Deskripsi',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ExpandableText(
+              farm['description'],
+              expandText: 'Lihat Selengkapnya',
+              collapseText: 'Tutup',
+              maxLines: 10,
+              linkStyle: TextStyle(
+                color: AppTheme.primary,
+              ),
+            ),
+            // show adddress from map
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Alamat',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              farm['address']['street'] +
+                  ', ' +
+                  farm['address']['city'] +
+                  ', ' +
+                  farm['address']['province'],
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
               ),
             ),
           ],

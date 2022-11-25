@@ -10,6 +10,12 @@ class ReuseTextField extends StatelessWidget {
   final int? maxLines;
   final int? minLines;
   final bool? obscureText;
+  final Color? suffixIconColor;
+  final Color? prefixIconColor;
+  final Color? focusColor;
+  final Color? fillColor;
+  final Color? hoverColor;
+  final Color? enabledBorderColor;
 
   final IconData? icon;
   final TextInputType? keyboardType;
@@ -37,7 +43,13 @@ class ReuseTextField extends StatelessWidget {
     this.validator,
     this.prefixIcon,
     this.suffixIcon,
+    this.suffixIconColor,
+    this.prefixIconColor,
     this.onPressSuffix,
+    this.focusColor,
+    this.fillColor,
+    this.hoverColor,
+    this.enabledBorderColor,
   });
 
   @override
@@ -54,21 +66,22 @@ class ReuseTextField extends StatelessWidget {
           onPressed: onPressSuffix,
           icon: Icon(
             suffixIcon,
-            color: AppTheme.dIconColor,
+            color: suffixIconColor ?? AppTheme.dIconColor,
           ),
         ),
         prefixIcon: prefixIcon != null
             ? Icon(
                 prefixIcon,
-                color: AppTheme.dIconColor,
+                color: prefixIconColor ?? AppTheme.dIconColor,
               )
             : null,
         // labelText: "Deskripsi Di Sini Yaa",
         hintText: hintText,
         labelText: labelText,
         labelStyle: TextStyle(
-            // color: Color.fromARGB(255, 137, 126, 255),
-            color: Colors.grey),
+          // color: Color.fromARGB(255, 137, 126, 255),
+          color: Colors.grey,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
@@ -77,15 +90,23 @@ class ReuseTextField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: AppTheme.primary
-              // color: Color.fromARGB(255, 137, 126, 255),
-              ),
+          borderSide: BorderSide(
+            color: focusColor ?? AppTheme.defaultBackground,
+            // color: Color.fromARGB(255, 137, 126, 255),
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-              // color: Color.fromARGB(255, 137, 126, 255),
-              ),
+            color: enabledBorderColor ??
+                AppTheme.defaultBackground.withOpacity(0.5),
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: AppTheme.danger,
+          ),
         ),
       ),
     );

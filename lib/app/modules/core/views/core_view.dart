@@ -13,9 +13,11 @@ class CoreView extends GetView<CoreController> {
       body: Obx(() => controller.views[controller.currentRout.value]),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
-            currentIndex: controller.currentRout.value,
-            onTap: (current) => controller.onPageChanged(current),
-            items: controller.menus),
+          type: BottomNavigationBarType.fixed,
+          currentIndex: controller.currentRout.value,
+          onTap: (current) => controller.onPageChanged(current),
+          items: controller.menus,
+        ),
       ),
     );
   }
