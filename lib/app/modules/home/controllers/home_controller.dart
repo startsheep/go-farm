@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_pattern_starter/app/data/dummy.dart';
 import 'package:getx_pattern_starter/app/widgets/carousel_content.dart';
 
 class HomeController extends GetxController {
@@ -23,39 +24,7 @@ class HomeController extends GetxController {
     },
   ].obs;
 
-  RxList<Map<String, dynamic>> farms = <Map<String, dynamic>>[
-    {
-      'id': 1,
-      'title': 'Ternak Hj Mursidin Al-Bakri',
-      'image': 'assets/placeholder.jpg',
-      'address': {
-        'street': 'Jl. Raya Cibadak',
-        'city': 'Bandung',
-        'province': 'Jawa Barat',
-      },
-    },
-    {
-      'id': 2,
-      'title': 'Ternak Hj Abul',
-      'image': 'assets/placeholder.jpg',
-      'address': {
-        'street': 'Jl. Raya Cibadak',
-        'city': 'Bandung',
-        'province': 'Jawa Barat',
-      },
-    },
-    {
-      'id': 3,
-      'title': 'Nan Farm',
-      'image': 'assets/placeholder.jpg',
-      'address': {
-        'street': 'Jl. Lohbener',
-        'city': 'Indramayu',
-        'province': 'Jawa Barat',
-      },
-    },
-  ].obs;
-
+  RxList<Map<String, dynamic>> farms = farmsDummy;
   RxList<Map<String, dynamic>> adoptedAnimals = <Map<String, dynamic>>[
     {
       'id': 1,
@@ -90,8 +59,54 @@ class HomeController extends GetxController {
         'province': 'Jawa Barat',
       },
     },
+    {
+      'id': 4,
+      'title': 'Amalie kucing persia',
+      'image': 'assets/placeholder.jpg',
+      'price': 100000,
+      'address': {
+        'street': 'Jl. Lohbener',
+        'city': 'Indramayu',
+        'province': 'Jawa Barat',
+      },
+    },
   ].obs;
 
+  RxList<Map<String, dynamic>> farmAnimals = <Map<String, dynamic>>[
+    {
+      'id': 1,
+      'title': 'Kambing Garut Hitam jantan',
+      'image': 'assets/placeholder.jpg',
+      'price': 100000,
+      'address': {
+        'street': 'Jl. Raya Cibadak',
+        'city': 'Bandung',
+        'province': 'Jawa Barat',
+      },
+    },
+    {
+      'id': 2,
+      'title': 'Kambing Jawa',
+      'image': 'assets/placeholder.jpg',
+      'price': 100000,
+      'address': {
+        'street': 'Jl. Raya Cibadak',
+        'city': 'Bandung',
+        'province': 'Jawa Barat',
+      },
+    },
+    {
+      'id': 3,
+      'title': 'Sapi Garut Jantan',
+      'image': 'assets/placeholder.jpg',
+      'price': 100000,
+      'address': {
+        'street': 'Jl. Lohbener',
+        'city': 'Indramayu',
+        'province': 'Jawa Barat',
+      },
+    },
+  ].obs;
   // assign carouselContents to a carousel items
 
   // RxList<Widget> carouselItems =
