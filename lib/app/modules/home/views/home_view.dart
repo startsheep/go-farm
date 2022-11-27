@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:getx_pattern_starter/app/modules/home/widgets/farm_animal.dart';
+import 'package:getx_pattern_starter/app/modules/home/widgets/livestock_box.dart';
 import 'package:getx_pattern_starter/app/modules/home/widgets/farm_content.dart';
 import 'package:getx_pattern_starter/app/routes/app_pages.dart';
 import 'package:getx_pattern_starter/app/theme/colors.dart';
@@ -26,7 +26,7 @@ class HomeView extends GetView<HomeController> {
             text: 'Go',
             style: TextStyle(
               color: AppTheme.primary,
-              fontSize: 30,
+              fontSize: 26,
               fontWeight: FontWeight.w600,
             ),
             children: [
@@ -34,7 +34,7 @@ class HomeView extends GetView<HomeController> {
                 text: ' Farm',
                 style: TextStyle(
                   color: AppTheme.secondary,
-                  fontSize: 30,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -107,8 +107,13 @@ class HomeView extends GetView<HomeController> {
                       title: "Peternakan",
                       sideTittle: "Lihat semua",
                       onTap: () {
-                        Get.toNamed(Routes.PRODUCTS,
-                            arguments: {'title': 'Peternakan'});
+                        Get.toNamed(
+                          Routes.PRODUCTS,
+                          arguments: {
+                            'title': 'Peternakan',
+                            'type': 'Farm',
+                          },
+                        );
                       },
                     ),
                   ),
@@ -145,6 +150,49 @@ class HomeView extends GetView<HomeController> {
                   ),
                   SizedBox(
                     height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: TitleBar(
+                      title: "Hewan Ternak ",
+                      sideTittle: "Lihat semua",
+                      onTap: () {
+                        Get.toNamed(
+                          Routes.PRODUCTS,
+                          arguments: {
+                            'title': 'Hewan Ternak',
+                            'type': 'LiveStock'
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  AnimatedContainer(
+                    duration: Duration(seconds: 1),
+                    height: 200,
+                    child: Obx(
+                      () {
+                        // make gridview
+                        return GridView.builder(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          // reverse: ,
+                          scrollDirection: Axis.horizontal,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 4 / 4,
+                          ),
+                          itemCount: controller.farmAnimals.length,
+                          itemBuilder: (context, index) {
+                            final farm = controller.farmAnimals[index];
+                            return LiveStockBox(content: farm);
+                          },
+                        );
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -194,40 +242,6 @@ class HomeView extends GetView<HomeController> {
                   ),
                   SizedBox(
                     height: 15,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: TitleBar(
-                      title: "Hewan Ternak / Potong",
-                      sideTittle: "Lihat semua",
-                    ),
-                  ),
-                  AnimatedContainer(
-                    duration: Duration(seconds: 1),
-                    height: 200,
-                    child: Obx(
-                      () {
-                        // make gridview
-                        return GridView.builder(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          // reverse: ,
-                          scrollDirection: Axis.horizontal,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 1,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                            childAspectRatio: 4 / 4,
-                          ),
-                          itemCount: controller.farmAnimals.length,
-                          itemBuilder: (context, index) {
-                            final farm = controller.farmAnimals[index];
-                            return FarmAnimal(content: farm);
-                          },
-                        );
-                      },
-                    ),
                   ),
                 ],
               ),
