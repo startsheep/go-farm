@@ -10,33 +10,22 @@ class HomeController extends GetxController {
     {
       'id': 1,
       'title': 'Pasar Domba',
-      'image': 'assets/placeholder.jpg',
+      'image': 'assets/pgarut.jpg',
     },
     {
       'id': 2,
-      'title': 'Hari Raya Kurban',
-      'image': 'assets/placeholder.jpg',
+      'title': 'Pasar Sapi',
+      'image': 'assets/psapi.jpg',
     },
     {
       'id': 3,
       'title': 'Pasar Domba mingguan',
-      'image': 'assets/placeholder.jpg',
+      'image': 'assets/pgarut2.jpg',
     },
   ].obs;
 
   RxList<Map<String, dynamic>> farms = farmsDummy;
   RxList<Map<String, dynamic>> adoptedAnimals = <Map<String, dynamic>>[
-    {
-      'id': 1,
-      'title': 'Anjing Kintamani',
-      'image': 'assets/placeholder.jpg',
-      'price': 100000,
-      'address': {
-        'street': 'Jl. Raya Cibadak',
-        'city': 'Bandung',
-        'province': 'Jawa Barat',
-      },
-    },
     {
       'id': 2,
       'title': 'Kucing Persia',
@@ -72,41 +61,7 @@ class HomeController extends GetxController {
     },
   ].obs;
 
-  RxList<Map<String, dynamic>> farmAnimals = <Map<String, dynamic>>[
-    {
-      'id': 1,
-      'title': 'Kambing Garut Hitam jantan',
-      'image': 'assets/placeholder.jpg',
-      'price': 100000,
-      'address': {
-        'street': 'Jl. Raya Cibadak',
-        'city': 'Bandung',
-        'province': 'Jawa Barat',
-      },
-    },
-    {
-      'id': 2,
-      'title': 'Kambing Jawa',
-      'image': 'assets/placeholder.jpg',
-      'price': 100000,
-      'address': {
-        'street': 'Jl. Raya Cibadak',
-        'city': 'Bandung',
-        'province': 'Jawa Barat',
-      },
-    },
-    {
-      'id': 3,
-      'title': 'Sapi Garut Jantan',
-      'image': 'assets/placeholder.jpg',
-      'price': 100000,
-      'address': {
-        'street': 'Jl. Lohbener',
-        'city': 'Indramayu',
-        'province': 'Jawa Barat',
-      },
-    },
-  ].obs;
+  RxList<Map<String, dynamic>> farmAnimals = liveStocksDum;
   // assign carouselContents to a carousel items
 
   // RxList<Widget> carouselItems =
