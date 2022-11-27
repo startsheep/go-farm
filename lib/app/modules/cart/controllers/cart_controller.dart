@@ -1,9 +1,12 @@
 import 'package:get/get.dart';
+import 'package:getx_pattern_starter/app/data/dummy.dart';
 
 class CartController extends GetxController {
   //TODO: Implement CartController
+  RxList<Map<String, dynamic>> carts = cartsDum;
 
-  final count = 0.obs;
+  dynamic selectedItem = null;
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +22,7 @@ class CartController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void removeItem(int index) {
+    carts.removeAt(index);
+  }
 }
